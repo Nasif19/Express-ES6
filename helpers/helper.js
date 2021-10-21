@@ -21,7 +21,7 @@ export default class Helper{
         return null;
     }
 
-    defaultHandle = (error, data, next) => {
+    defaultHandler = (error, data, next) => {
         if (error) {
             console.log('error', error);
             next(null, {

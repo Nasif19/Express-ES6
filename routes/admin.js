@@ -1,5 +1,4 @@
 import express from "express";
-import helper from "../helpers/helper.js";
 import AdminController from "../controllers/AdminController.js";
 
 const route = express.Router();
@@ -10,42 +9,15 @@ route.use((req, res, next) => {
 });
 
 route.post('/', (req, res) => {
-    admin.insert(req, (data, error) => {
-        if (error) {
-            res.send({
-                error: error,
-                status: 'Error',
-            });
-        } else {
-            res.send(data);
-        }
-    });
+    admin.insert(req, (data, error) => error ? res.send({error: error, status: 'Error'}) : res.send(data));
 })
 
-route.get('/index', (req, res)=> { 
-    admin.index((data, error) => {
-        if (error) {
-            res.send({
-                error: error,
-                status: 'Error',
-            });
-        } else {
-            res.send(data);
-        }
-    });
+route.get('/index', (req, res)=> {
+    admin.index((data, error) => error ? res.send({error: error, status: 'Error'}) : res.send(data));
 });
 
 route.get('/:id/edit', (req, res) => {
-    admin.getUserById(req, (data, error) => {
-        if (error) {
-            res.send({
-                error: error,
-                status: 'error'
-            });
-        } else {
-            res.send(data);
-        }
-    });
+    admin.getUserById(req, (data, error) => error ? res.send({error: error, status: 'Error'}) : res.send(data));
 })
 
 export default route;

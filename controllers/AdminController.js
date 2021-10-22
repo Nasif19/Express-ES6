@@ -11,7 +11,7 @@ export default class AdminController extends AdminModel {
         });
     }
 
-    index = (next) => {
+    index = next => {
         db.query(this.getAllData(), (error, data) => {
             helper.defaultHandler(error, data, next);
         });
@@ -19,6 +19,18 @@ export default class AdminController extends AdminModel {
 
     getUserById = (req, next) => {
         db.query(this.getByIdData(req.params.id), (error, data) => {
+            helper.defaultHandler(error, data, next);
+        });
+    }
+
+    update = (req, next) => {
+        db.query(this.updateData(req.query, req.params.id), (error, data) => {
+            helper.defaultHandler(error, data, next);
+        });
+    }
+
+    delete = (req, next) => {
+        db.query(this.deleteData(req.params.id), (error, data) => {
             helper.defaultHandler(error, data, next);
         });
     }

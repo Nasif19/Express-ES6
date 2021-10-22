@@ -10,7 +10,7 @@ route.use((req, res, next) => {
 
 route.post('/', (req, res) => {
     admin.insert(req, (data, error) => error ? res.send({error: error, status: 'Error'}) : res.send(data));
-})
+});
 
 route.get('/index', (req, res)=> {
     admin.index((data, error) => error ? res.send({error: error, status: 'Error'}) : res.send(data));
@@ -18,6 +18,14 @@ route.get('/index', (req, res)=> {
 
 route.get('/:id/edit', (req, res) => {
     admin.getUserById(req, (data, error) => error ? res.send({error: error, status: 'Error'}) : res.send(data));
-})
+});
+
+route.put('/:id', (req, res)=> {
+    admin.update(req, (data, error) => error ? res.send({error: error, status: 'Error'}) : res.send(data));
+});
+
+route.delete('/:id', (req, res) => {
+    admin.delete(req, (data, error) => error ? res.send({error: error, status: 'Error'}) : res.send(data));
+});
 
 export default route;

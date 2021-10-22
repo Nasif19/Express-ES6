@@ -1,7 +1,9 @@
 export default class BasicQueries {
-    constructor (table_name) {
-        this.table_name = table_name;
+    table_name = '';
+    constructor (tbl_name) {
+        this.table_name = tbl_name;
     }
+
     formatInsertData = values => {
         let row_vals = ``;
         for (const key in values) {
@@ -20,6 +22,7 @@ export default class BasicQueries {
         }
         return row_vals.slice(0, -1);
     }
+
     //Queries
     insertQuery = insert_values => `INSERT INTO ${this.table_name} (${Object.keys(insert_values)}) VALUES (${this.formatInsertData(insert_values)});`;
     getAllQuery = () => `SELECT * FROM ${this.table_name};`;

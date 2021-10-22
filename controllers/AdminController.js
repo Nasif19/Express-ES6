@@ -3,35 +3,36 @@ import Helper from "../helpers/helper.js";
 import AdminModel from "../models/admin.js";
 
 const helper = new Helper();
-export default class AdminController extends AdminModel {
-
-    insert = (req, next) => {
-        db.query(this.insertData(req.query), (error, data) => {
+const admin = new AdminModel();
+export default class AdminController {
+    
+    store = (req, next) => {
+        db.query(admin.create(req.query), (error, data) => {
             helper.defaultHandler(error, data, next);
         });
     }
 
     index = next => {
-        db.query(this.getAllData(), (error, data) => {
-            helper.defaultHandler(error, data, next);
-        });
-    } 
-
-    getUserById = (req, next) => {
-        db.query(this.getByIdData(req.params.id), (error, data) => {
+        db.query(admin.all(), (error, data) => {
             helper.defaultHandler(error, data, next);
         });
     }
 
-    update = (req, next) => {
-        db.query(this.updateData(req.query, req.params.id), (error, data) => {
+    edit = (req, next) => {
+        db.query(admin.find(req.params.id), (error, data) => {
+            helper.defaultHandler(error, data, next);
+        });
+    }
+
+    updates = (req, next) => {
+        db.query(admin.update(req.query, req.params.id), (error, data) => {
             helper.defaultHandler(error, data, next);
         });
     }
 
     delete = (req, next) => {
-        db.query(this.deleteData(req.params.id), (error, data) => {
+        db.query(admin.deleteData(req.params.id), (error, data) => {
             helper.defaultHandler(error, data, next);
         });
     }
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       

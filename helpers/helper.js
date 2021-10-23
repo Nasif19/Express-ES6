@@ -1,4 +1,4 @@
-export default class Helper{
+export default class Helper {
     getOffset = (currentPage = 1, listPerPage) => {
         return (currentPage - 1) * [listPerPage];
     }
@@ -7,7 +7,7 @@ export default class Helper{
         if (rows.length > 0) {
             return rows;
         }
-        return null;
+        return [];
     }
 
     defaultHandler = (error, data, next) => {

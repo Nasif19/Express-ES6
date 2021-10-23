@@ -1,3 +1,4 @@
+import db from "../db.js";
 import BasicQueries from "../queries/basic_queries.js";
 
 export default class Model {
@@ -6,9 +7,29 @@ export default class Model {
         this.table_name = tbl_name;
     }
 
-    create = values => new BasicQueries(this.table_name).insertQuery(values);
-    all = () => new BasicQueries(this.table_name).getAllQuery();
-    find = id => new BasicQueries(this.table_name).getByIdQuery(id);
-    update = (values, id) => new BasicQueries(this.table_name).updateQuery(values, id);
-    delete = id => new BasicQueries(this.table_name).deleteQuery(id);
+    create = (values, callback, next) => {
+        db.query(new BasicQueries(this.table_name).insertQuery(values), (error, data) => {
+            callback(error, data, next);
+        });
+    }
+    all = (callback, next) => {
+        db.query(new BasicQueries(this.table_name).getAllQuery(), (error, data) => {
+            callback(error, data, next);
+        });
+    }
+    find = (id, callback, next) => {
+        db.query(new BasicQueries(this.table_name).getByIdQuery(id), (error, data) => {
+            callback(error, data, next);
+        });
+    }
+    update = (values, id, callback, next) => {
+        db.query(new BasicQueries(this.table_name).updateQuery(values, id), (error, data) => {
+            callback(error, data, next);
+        });
+    }
+    delete = (id, callback, next) => {
+        db.query(new BasicQueries(this.table_name).deleteQuery(id), (error, data) => {
+            callback(error, data, next);
+        });
+    }
 }

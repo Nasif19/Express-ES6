@@ -24,33 +24,4 @@ export default class AdminController {
     destroy = (req, next) => {
         admin.delete(req.params.id, (error, data) => helper.defaultHandler(error, data, next));
     }
-
-    test = (req, next) => {
-        const callback = (data) => {
-            let str = ``;
-            for (const key of data) {
-                str += `<option value="${key.id}">${key.name}</option>`;
-            }
-            console.log(str);
-            next({
-                status: 'success',
-                message: 'Data retrieved successfully',
-                data: data
-            }, str);
-        }
-        let data = admin.test(callback);
-        // let data = [
-        //     {
-        //         "id": 1,
-        //         "name": "Nasif",
-        //         "age": 26
-        //     },
-        //     {
-        //         "id": 2,
-        //         "name": "Nadia",
-        //         "age": 22
-        //     }
-        // ];
-        // console.log('data', data);
-    }
 }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       

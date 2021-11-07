@@ -19,7 +19,7 @@ export default class Helper {
             });
         }
         next({
-            status: 'success',
+            status: 200,
             message: 'Data retrieved successfully',
             data: this.emptyOrRows(data)
         }, null);

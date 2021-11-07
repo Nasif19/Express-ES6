@@ -2,8 +2,16 @@ import express from "express";
 import bodyParser from "body-parser";
 import adminRoutes from "./routes/admin.js"; 
 import db from "./db.js";
+import cors from "cors";
+// const cors = require("cors");
 const app = express();
 const PORT = 5000;
+
+app.use(cors({//Cors Options
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ })); // Use this after the variable declaration
 
 // app.use(cors());
 app.use(bodyParser.json());
